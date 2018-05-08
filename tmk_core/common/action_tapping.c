@@ -153,7 +153,8 @@ bool process_tapping(keyrecord_t *keyp)
                     debug("Tapping: Tap release("); debug_dec(tapping_key.tap.count); debug(")\n");
                     keyp->tap = tapping_key.tap;
                     process_record(keyp);
-                    tapping_key = *keyp;
+                    /* always reset tap timer when tap release */
+                    tapping_key = (keyrecord_t){};
                     debug_tapping_key();
                     return true;
                 }
