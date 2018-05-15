@@ -74,13 +74,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // }}}
 
 // Raise Layer {{{
-// | & | ! | " | ' | ( | • | ^ | ←   | {   | }   | DEL |
-// |   |   | - | ⇥ | / | * | • | ←   | ↓   | ↑   | →   | $ |
-// | < | > | 8 | 9 |   |   | • | BSP | pDN | pUP |     | → |
+// | &    | ! | "   | '   | ( | • | ^   | ←   | {   | } | DEL |
+// | pipe | - | ⇥   | /   | * | • | ←   | ↓   | ↑   | → | $   |
+// | <    | > | F14 | F15 | [ | • | BSP | pDN | pUP | ^  | →   |
 [_RAISE] = LAYOUT( \
-    KC_AMPR, KC_EXLM, KC_DQT, KC_QUOT, KC_LPRN, KC_CIRC, KC_HOME, KC_LCBR, KC_RCBR      , KC_DEL, \
-    KC_PIPE, KC_MINS, KC_TAB, KC_SLSH, KC_ASTR, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT     , KC_DLR, \
-    KC_LT  , KC_GT  , KC_F14  , KC_F15   , KC_LBRC, KC_BSPC, KC_PGDN, KC_PGUP, KC_CIRCUMFLEX, KC_END, \
+    KC_AMPR, KC_EXLM, KC_DQT, KC_QUOT, KC_LPRN, KC_CIRC, KC_CIRC, KC_LCBR, KC_RCBR , KC_DEL, \
+    KC_PIPE, KC_MINS, KC_TAB, KC_SLSH, KC_ASTR, KC_LEFT, KC_DOWN, KC_UP  , KC_RIGHT, KC_DLR, \
+    KC_LT  , KC_GT  , KC_F14, KC_F15 , KC_LBRC, KC_BSPC, KC_PGDN, KC_PGUP, KC_HOME, KC_END, \
     ___    , ___    , ___   , ___    , ___    , ___ \
 )          ,
 // }}}
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // | # | _ | = | { | } | • | } | 4 | 5 | 6 | - |
 // | 6 | 7 | 8 | [ | ] | • | 0 | 1 | 2 | 3 | 5 |
 [_LOWER] = LAYOUT( \
-    KC_PERC, KC_AT  , KC_HASH, KC_LPRN, KC_RPRN, KC_DLR, KC_7, KC_8, KC_9, KC_CIRC, \
+    KC_PERC, KC_AT  , KC_HASH, KC_LPRN, KC_RPRN, KC_DLR, KC_7, KC_8, KC_9, KC_GRV, \
     KC_HASH, KC_UNDS, KC_EQL , KC_LCBR, KC_RCBR, ___   , KC_4, KC_5, KC_6, KC_PERC, \
     KC_BSLS, KC_MINS, KC_GRV , KC_LBRC, KC_RBRC, KC_0  , KC_1, KC_2, KC_3, KC_TILD, \
     ___    , ___    , ___    , ___    , ___    , ___ \
