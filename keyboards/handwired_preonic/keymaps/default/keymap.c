@@ -56,7 +56,7 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BA] = LAYOUT ( \
-        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_LSBR , BE_RSBR , MY_LCBR , MY_RCBR  , KC_0    , BE_MINS    , \
+        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_LSBR , BE_RSBR , MY_LCBR , MY_RCBR  , BE_AG    , BE_MINS    , \
         KC_TAB     , BE_A    , BE_Z    , KC_E    , KC_R    , KC_T    , KC_Y    , KC_U    , KC_I    , KC_O     , KC_P    , BE_CIRC    , \
         _CAPS      , MY_Q    , MY_S    , MY_D    , MY_F    , MY_G    , KC_H    , MY_J    , MY_K    , MY_L     , MY_M    , KC_ENT     , \
         KC_LSFT    , BE_W    , KC_X    , KC_C    , KC_V    , KC_B    , KC_N    , BE_COMM , MY_DOT  , BE_COLN  , BE_EQL  , KC_LSFT    , \
@@ -98,37 +98,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
+    /* case MY_DOT: */
+    /*   if (record->event.pressed) { */
+    /*     if (get_mods() & MODS_SHIFT_MASK){ */
+    /*       /1* SEND_STRING(SS_TAP(X_LESS)); *1/ */
+    /*       SEND_STRING(SS_UP(X_LSHIFT)";"SS_DOWN(X_LSHIFT)); */
+    /*       /1* prev_mods= get_mods(); *1/ */
+    /*       /1* clear_keyboard(); *1/ */
+    /*       /1* tap_code16(BE_SCLN); *1/ */
+    /*       /1* /2* register_code(BE_SCLN); *2/ *1/ */
+    /*       /1* set_mods(prev_mods); *1/ */
+    /*       /1* prev_mods= get_mods(); *1/ */
+    /*       /1* clear_keyboard(); *1/ */
+    /*       /1* /2* tap_code16(BE_SCLN); *2/ *1/ */
+    /*       /1* SEND_STRING(";"); *1/ */
+    /*     } */
+    /*     else */
+    /*       tap_code16(BE_DOT); */
+    /*   } */
+    /*   /1* return false; *1/ */
+    /*   break; */
+    /* case MY_RCBR: */
+    /*   if (record->event.pressed) */
+    /*     (keyboard_report->mods & MODS_SHIFT_MASK) ?  tap_code16(BE_8) : SEND_STRING("}"); */
+    /*   break; */
+    /* case MY_LCBR: */
+    /*   if (record->event.pressed) */
+    /*     (get_mods() & MODS_SHIFT_MASK) ?  tap_code16(BE_7) : SEND_STRING("{"); */
+    /*   break; */
+    /* case MY_TILD: */
+    /*   if (record->event.pressed) */
+    /*     SEND_STRING("{"); */
+    // I swapped some keys from their default position so this configures how they should be shifted:
     case MY_DOT:
-      if (record->event.pressed) {
-        if (get_mods() & MODS_SHIFT_MASK){
-          /* SEND_STRING(SS_TAP(X_LESS)); */
-          SEND_STRING(SS_UP(X_LSHIFT)";"SS_DOWN(X_LSHIFT));
-          /* prev_mods= get_mods(); */
-          /* clear_keyboard(); */
-          /* tap_code16(BE_SCLN); */
-          /* /1* register_code(BE_SCLN); *1/ */
-          /* set_mods(prev_mods); */
-          /* prev_mods= get_mods(); */
-          /* clear_keyboard(); */
-          /* /1* tap_code16(BE_SCLN); *1/ */
-          /* SEND_STRING(";"); */
-        }
-        else
-          tap_code16(BE_DOT);
-      }
-      /* return false; */
+      if (record->event.pressed)
+        (get_mods() & MODS_SHIFT_MASK) ? SEND_STRING(SS_UP(X_LSHIFT)";"SS_DOWN(X_LSHIFT)) : SEND_STRING(".");
       break;
     case MY_RCBR:
       if (record->event.pressed)
-        (keyboard_report->mods & MODS_SHIFT_MASK) ?  tap_code16(BE_8) : SEND_STRING("}");
+        (get_mods() & MODS_SHIFT_MASK) ?  SEND_STRING(SS_UP(X_LSHIFT)"8"SS_DOWN(X_LSHIFT)) : SEND_STRING("}");
       break;
     case MY_LCBR:
-      if (record->event.pressed)
-        (get_mods() & MODS_SHIFT_MASK) ?  tap_code16(BE_7) : SEND_STRING("{");
+        (get_mods() & MODS_SHIFT_MASK) ?  SEND_STRING(SS_UP(X_LSHIFT)"7"SS_DOWN(X_LSHIFT)) : SEND_STRING("{");
       break;
-    case MY_TILD:
-      if (record->event.pressed)
-        SEND_STRING("{");
+    case MY_TILD: // I don't use this as a dead key
+      if (record->event.pressed) SEND_STRING("~ ");
       break;
   }
   return true;
