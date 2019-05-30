@@ -20,45 +20,70 @@
 #define _BA 0
 #define _SP 1
 #define _AG 2
+#define _FN 3
 
 #define THUMB_F LT(_SP,KC_SPC)
 #define THUMB_K LT(_AG,KC_TAB)
+#define MY_Q LCTL_T(BE_Q)
+#define MY_S LSFT_T(KC_S)
+#define MY_D LALT_T(KC_D)
+#define MY_F LT(_SP,KC_F)
+#define MY_G LT(_FN,KC_G)
+
+#define MY_J LT(_SP,KC_J)
+#define MY_K LALT_T(KC_K)
+#define MY_L LSFT_T(KC_L)
+#define MY_M LCTL_T(BE_M)
 
 #define THUMB_H LSFT_T(KC_BSPC)
 #define THUMB_G LSFT_T(KC_ESC)
-#define _LSFT LSFT_T(KC_F12)
 #define THUMB_J RCTL_T(KC_ENT)
 #define _CAPS LCTL_T(KC_ESC)
+#define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
+/* #define MY_DOT M(0) */
 enum custom_keycodes {
   QMKBEST = SAFE_RANGE,
+  MY_RCBR,
+  MY_LCBR,
+  MY_DOT,
+  MY_TILD
 };
 
+/* const uint16_t PROGMEM test_combo[] = {BE_Q, KC_S, COMBO_END}; */
+/* combo_t key_combos[COMBO_COUNT] = {COMBO(test_combo, KC_ESC)}; */
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BA] = LAYOUT ( \
-        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_RPRN , BE_LSBR , BE_RSBR , BE_RCBR  , KC_0    , BE_MINS    , \
-        KC_TAB     , BE_A    , BE_Z    , KC_E    , KC_R    , KC_T    , KC_Y    , KC_U    , KC_I    , KC_O     , KC_P    , KC_LBRC    , \
-        _CAPS      , BE_Q    , KC_S    , KC_D    , KC_F    , KC_G    , KC_H    , KC_J    , KC_K    , KC_L     , BE_M    , KC_ENT     , \
-        _LSFT      , BE_W    , KC_X    , KC_C    , KC_V    , KC_B    , KC_N    , BE_COMM , BE_DOT  , KC_DOT   , KC_SLSH , KC_RSFT    , \
+        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_LSBR , BE_RSBR , MY_LCBR , MY_RCBR  , KC_0    , BE_MINS    , \
+        KC_TAB     , BE_A    , BE_Z    , KC_E    , KC_R    , KC_T    , KC_Y    , KC_U    , KC_I    , KC_O     , KC_P    , BE_CIRC    , \
+        _CAPS      , MY_Q    , MY_S    , MY_D    , MY_F    , MY_G    , KC_H    , MY_J    , MY_K    , MY_L     , MY_M    , KC_ENT     , \
+        KC_LSFT    , BE_W    , KC_X    , KC_C    , KC_V    , KC_B    , KC_N    , BE_COMM , MY_DOT  , BE_COLN  , BE_EQL  , KC_LSFT    , \
         KC_LCTL    , KC_LGUI , KC_LGUI , KC_LALT , THUMB_F , THUMB_G , THUMB_H , THUMB_J , THUMB_K , KC_K     , KC_L    , KC_CAPS  \
        )           ,
   // space
 [_SP] = LAYOUT ( \
         _______    , _______ , _______ , _______ , _______ , _______ , _______ , _______ , BE_LCBR , BE_RCBR  , _______ , _______    ,
-        KC_TAB     , KC_1    , KC_2    , KC_3    , KC_4    , KC_5    , KC_6    , KC_HOME , BE_LCBR , BE_RCBR  , KC_DEL  , KC_PGUP    , \
+        KC_TAB     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LSBR , BE_RSBR , KC_HOME , BE_LCBR , BE_RCBR  , KC_DEL  , KC_PGUP    , \
         _CAPS      , BE_PIPE , BE_MINS , KC_TAB  , BE_SLSH , BE_PND  , KC_LEFT , KC_DOWN , KC_UP   , KC_RIGHT , KC_END  , KC_PGDN    , \
-        _______    , BE_LESS , BE_GRTR , KC_C    , KC_V    , KC_B    , KC_BSPC , KC_M    , KC_COMM , KC_DOT   , KC_SLSH , KC_RSFT    , \
+        KC_LSFT    , BE_LESS , BE_GRTR , KC_C    , KC_V    , KC_B    , KC_BSPC , KC_M    , KC_COMM , KC_DOT   , KC_SLSH , KC_LSFT    , \
         KC_LCTL    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
         )          ,
 // altgr
 [_AG] = LAYOUT ( \
-        KC_ESC     , BE_PIPE , BE_AT   , BE_HASH , KC_4    , KC_5    , KC_6    , S(KC_7) , S(KC_8) , S(KC_9)  , KC_KP_0 , KC_A       , \
-        KC_TAB     , BE_PIPE , BE_AT   , BE_HASH , KC_R    , KC_T    , KC_Y    , S(KC_7) , S(KC_8) , S(KC_9)  , KC_P    , KC_PGUP    , \
-        _CAPS      , BE_PIPE , BE_UNDS , KC_D    , KC_SLSH , KC_G    , KC_BSPC , S(KC_4) , S(KC_5) , S(KC_6)  , KC_SCLN , BE_GRV     , \
-        _LSFT      , BE_BSLS , KC_X    , KC_C    , KC_V    , KC_B    , S(KC_0) , S(KC_1) , S(KC_2) , S(KC_3)  , QMKBEST , KC_RSFT    , \
+        KC_ESC     , BE_PIPE , BE_AT   , BE_HASH , _______ , _______ , _______ , BE_7    , BE_8    , BE_9     , KC_KP_0 , KC_A       , \
+        KC_TAB     , BE_PIPE , BE_AT   , BE_HASH , _______ , _______ , _______ , BE_7    , BE_8    , BE_9     , KC_P    , KC_PGUP    , \
+        _CAPS      , BE_PIPE , BE_UNDS , KC_D    , KC_SLSH , KC_G    , _______ , BE_4    , BE_5    , BE_6     , BE_DLR  , BE_GRV     , \
+        KC_LSFT    , BE_BSLS , _______ , _______ , _______ , _______ , BE_0    , BE_1    , BE_2    , BE_3     , MY_TILD , KC_LSFT    , \
         KC_LCTL    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
+        )          ,
+[_FN] = LAYOUT ( \
+        KC_ESC     , _______ , _______ , _______ , _______ , _______ , _______ , KC_F7   , KC_F8   , KC_F9    , _______ , _______    , \
+        _______    , _______ , _______ , _______ , _______ , _______ , _______ , KC_F7   , KC_F8   , KC_F9    , _______ , _______    , \
+        _______    , _______ , MY_S    , MY_D    , _______ , _______ , KC_F11  , KC_F4   , KC_F5   , KC_F6    , _______ , _______    , \
+        KC_LSFT    , _______ , _______ , _______ , _______ , _______ , KC_F10  , KC_F1   , KC_F2   , KC_F3    , _______ , _______    , \
+        _______    , _______ , _______ , _______ , _______ , _______ , _______ , KC_F11  , KC_F12  , KC_F13   , _______ , _______  \
         )          ,
   /* [0] = tkl */
   /*   KC_ESC      , KC_F1   , KC_F2   , KC_F3   , KC_F4   , KC_F5   , KC_F6   , KC_F7   , KC_F8   , KC_F9    , KC_F10  , KC_F11     , KC_F12  , KC_PSCR , KC_SLCK , KC_PAUS , */
@@ -70,16 +95,56 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* ) \ */
 
 };
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QMKBEST:
+    case MY_DOT:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("~ ");
-      } else {
-        // when keycode QMKBEST is released
+        if (get_mods() & MODS_SHIFT_MASK){
+          /* SEND_STRING(SS_TAP(X_LESS)); */
+          SEND_STRING(SS_UP(X_LSHIFT)";"SS_DOWN(X_LSHIFT));
+          /* prev_mods= get_mods(); */
+          /* clear_keyboard(); */
+          /* tap_code16(BE_SCLN); */
+          /* /1* register_code(BE_SCLN); *1/ */
+          /* set_mods(prev_mods); */
+          /* prev_mods= get_mods(); */
+          /* clear_keyboard(); */
+          /* /1* tap_code16(BE_SCLN); *1/ */
+          /* SEND_STRING(";"); */
+        }
+        else
+          tap_code16(BE_DOT);
       }
+      /* return false; */
+      break;
+    case MY_RCBR:
+      if (record->event.pressed)
+        (keyboard_report->mods & MODS_SHIFT_MASK) ?  tap_code16(BE_8) : SEND_STRING("}");
+      break;
+    case MY_LCBR:
+      if (record->event.pressed)
+        (get_mods() & MODS_SHIFT_MASK) ?  tap_code16(BE_7) : SEND_STRING("{");
+      break;
+    case MY_TILD:
+      if (record->event.pressed)
+        SEND_STRING("{");
       break;
   }
   return true;
 };
+
+/* const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) { */
+/*     switch(id) { */
+/*         case 0: { */
+/*             if (record->event.pressed) { */
+/*                 if(keyboard_report->mods & MODS_SHIFT_MASK) */
+/*                   return SENDSTRING(';'); */
+/*                 else */
+/*                   return MACRO( D(LSFT), T(COMM), U(LSFT), END  ); */
+/*             } */
+/*             break; */
+/*         } */
+/*     } */
+/*     return MACRO_NONE; */
+/* }; */
