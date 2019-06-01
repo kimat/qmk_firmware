@@ -49,7 +49,8 @@ enum custom_keycodes {
   MY_RCBR,
   MY_LCBR,
   MY_DOT,
-  MY_TILD
+  MY_TILD,
+  SALT_TAB
 };
 
 /* const uint16_t PROGMEM test_combo[] = {BE_Q, KC_S, COMBO_END}; */
@@ -62,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB     , BE_A    , BE_Z    , KC_E    , KC_R    , KC_T    , KC_Y    , KC_U    , KC_I    , KC_O     , KC_P    , BE_CIRC    , \
         _CAPS      , MY_Q    , MY_S    , MY_D    , MY_F    , MY_G    , KC_H    , KC_J    , KC_K    , MY_L     , MY_M    , KC_ENT     , \
         KC_LSFT    , BE_W    , KC_X    , KC_C    , KC_V    , KC_B    , KC_N    , BE_COMM , MY_DOT  , BE_COLN  , BE_EQL  , KC_LSFT    , \
-        _LCTL      , KC_LGUI , KC_LGUI , KC_LALT , THUMB_F , THUMB_G , THUMB_H , THUMB_J , THUMB_K , KC_K     , KC_L    , KC_CAPS  \
+        SALT_TAB      , KC_LGUI , KC_LGUI , KC_LALT , THUMB_F , THUMB_G , THUMB_H , THUMB_J , THUMB_K , KC_K     , KC_L    , KC_CAPS  \
        )           ,
   // space
 [_SP] = LAYOUT ( \
@@ -97,6 +98,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* ) \ */
 
 };
+
+bool is_alt_tab_active = false;    // ADD this near the begining of keymap.c
+uint16_t alt_tab_timer = 0;        // we will be using them soon.
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -146,21 +150,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case MY_TILD: // I don't use this as a dead key
       if (record->event.pressed) SEND_STRING("~ ");
       break;
+    case SALT_TAB:
+      if (record->event.pressed) {
+        if (!is_alt_tab_active) {
+          is_alt_tab_active = true;
+          register_code(KC_LALT);
+        }
+        alt_tab_timer = timer_read();
+        register_code(KC_TAB);
+      }
+      else
+        unregister_code(KC_TAB);
+      break;
   }
   return true;
 };
 
-/* const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) { */
-/*     switch(id) { */
-/*         case 0: { */
-/*             if (record->event.pressed) { */
-/*                 if(keyboard_report->mods & MODS_SHIFT_MASK) */
-/*                   return SENDSTRING(';'); */
-/*                 else */
-/*                   return MACRO( D(LSFT), T(COMM), U(LSFT), END  ); */
-/*             } */
-/*             break; */
-/*         } */
-/*     } */
-/*     return MACRO_NONE; */
-/* }; */
+void matrix_scan_user(void) {     // The very important timer.
+  if (is_alt_tab_active) {
+    if (timer_elapsed(alt_tab_timer) > 300) {
+      unregister_code(KC_LALT);
+      is_alt_tab_active = false;
+    }
+  }
+}
