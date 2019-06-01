@@ -39,6 +39,8 @@
 #define THUMB_G LSFT_T(KC_ESC)
 #define THUMB_J RCTL_T(KC_ENT)
 #define _CAPS LCTL_T(KC_ESC)
+#define _LCTL LCTL_T(KC_F12)
+
 #define MODS_SHIFT_MASK (MOD_BIT(KC_LSHIFT)|MOD_BIT(KC_RSHIFT))
 
 /* #define MY_DOT M(0) */
@@ -56,11 +58,11 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_BA] = LAYOUT ( \
-        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_LSBR , BE_RSBR , MY_LCBR , MY_RCBR  , BE_AG    , BE_MINS    , \
+        KC_ESC     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LPRN , BE_LSBR , BE_RSBR , MY_LCBR , MY_RCBR  , BE_AGRV , BE_MINS    , \
         KC_TAB     , BE_A    , BE_Z    , KC_E    , KC_R    , KC_T    , KC_Y    , KC_U    , KC_I    , KC_O     , KC_P    , BE_CIRC    , \
-        _CAPS      , MY_Q    , MY_S    , MY_D    , MY_F    , MY_G    , KC_H    , MY_J    , MY_K    , MY_L     , MY_M    , KC_ENT     , \
+        _CAPS      , MY_Q    , MY_S    , MY_D    , MY_F    , MY_G    , KC_H    , KC_J    , KC_K    , MY_L     , MY_M    , KC_ENT     , \
         KC_LSFT    , BE_W    , KC_X    , KC_C    , KC_V    , KC_B    , KC_N    , BE_COMM , MY_DOT  , BE_COLN  , BE_EQL  , KC_LSFT    , \
-        KC_LCTL    , KC_LGUI , KC_LGUI , KC_LALT , THUMB_F , THUMB_G , THUMB_H , THUMB_J , THUMB_K , KC_K     , KC_L    , KC_CAPS  \
+        _LCTL      , KC_LGUI , KC_LGUI , KC_LALT , THUMB_F , THUMB_G , THUMB_H , THUMB_J , THUMB_K , KC_K     , KC_L    , KC_CAPS  \
        )           ,
   // space
 [_SP] = LAYOUT ( \
@@ -68,15 +70,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB     , BE_AMP  , BE_EXLM , BE_QUOT , BE_APOS , BE_LSBR , BE_RSBR , KC_HOME , BE_LCBR , BE_RCBR  , KC_DEL  , KC_PGUP    , \
         _CAPS      , BE_PIPE , BE_MINS , KC_TAB  , BE_SLSH , BE_PND  , KC_LEFT , KC_DOWN , KC_UP   , KC_RIGHT , KC_END  , KC_PGDN    , \
         KC_LSFT    , BE_LESS , BE_GRTR , KC_C    , KC_V    , KC_B    , KC_BSPC , KC_M    , KC_COMM , KC_DOT   , KC_SLSH , KC_LSFT    , \
-        KC_LCTL    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
+        _______    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
         )          ,
 // altgr
 [_AG] = LAYOUT ( \
         KC_ESC     , BE_PIPE , BE_AT   , BE_HASH , _______ , _______ , _______ , BE_7    , BE_8    , BE_9     , KC_KP_0 , KC_A       , \
-        KC_TAB     , BE_PIPE , BE_AT   , BE_HASH , _______ , _______ , _______ , BE_7    , BE_8    , BE_9     , KC_P    , KC_PGUP    , \
+        KC_TAB     , BE_PIPE , BE_AT   , BE_HASH , _______ , BE_RPRN , _______ , BE_7    , BE_8    , BE_9     , KC_P    , KC_PGUP    , \
         _CAPS      , BE_PIPE , BE_UNDS , KC_D    , KC_SLSH , KC_G    , _______ , BE_4    , BE_5    , BE_6     , BE_DLR  , BE_GRV     , \
         KC_LSFT    , BE_BSLS , _______ , _______ , _______ , _______ , BE_0    , BE_1    , BE_2    , BE_3     , MY_TILD , KC_LSFT    , \
-        KC_LCTL    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
+        _______    , KC_LGUI , _______ , KC_LALT , _______ , _______ , THUMB_H , THUMB_J , _______ , KC_K     , KC_L    , KC_CAPS  \
         )          ,
 [_FN] = LAYOUT ( \
         KC_ESC     , _______ , _______ , _______ , _______ , _______ , _______ , KC_F7   , KC_F8   , KC_F9    , _______ , _______    , \
