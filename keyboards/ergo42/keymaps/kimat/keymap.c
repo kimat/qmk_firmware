@@ -1,29 +1,55 @@
 #include QMK_KEYBOARD_H
-
+#include "keymap_belgian.h"
 
 #define BASE 0
 #define META 1
 #define SYMB 2
 #define GAME 3
 
+/*
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┐
+ * │ ² │ & │ é │ " │ ' │ ( │ § │ è │ ! │ ç │ à │ ) │ - │       │
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┤
+ * │     │ A │ Z │ E │ R │ T │ Y │ U │ I │ O │ P │ ^ │ $ │     │
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    │
+ * │      │ Q │ S │ D │ F │ G │ H │ J │ K │ L │ M │ ù │ µ │    │
+ * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴────┤
+ * │    │ < │ W │ X │ C │ V │ B │ N │ , │ ; │ : │ = │          │
+ * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴───┼───┴┬────┬────┤
+ * │    │    │    │                        │    │    │    │    │
+ * └────┴────┴────┴────────────────────────┴────┴────┴────┴────┘
+ */
+/* #define BE_DLR  KC_RBRC // $ */
+/* #define BE_DCIR KC_LBRC // ^ (dead) */
+/* #define BE_DLR  KC_RBRC // $ */
+
+/* #define BE_UGRV KC_QUOT // ù */
+/* #define BE_MICR KC_NUHS // µ */
+
+/* #define BE_COMM KC_M    // , */
+/* #define BE_SCLN KC_COMM // ; */
+/* #define BE_COLN KC_DOT  // : */
+/* #define BE_EQL  KC_SLSH // = */
+#define FIX_BE_J    KC_J    // J
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* BASE
-   * ,------------------------------------------------.                                        ,------------------------------------------------.
-   * | ESC  | Tab  |   Q  |   W  |   E  |   R  |  T   |                                        |  Y   |   U  |   I  |   O  |   P  |   [  | Bksp |
-   * |------+------+------+------+------+------+------|                                        |-------------+------+------+------+------+------|
-   * | Del  | RCtrl|   A  |   S  |   D  |   F  |  G   |                                        |  H   |   J  |   K  |   L  |   ;  |   ]  | Enter|
-   * |------+------+------+------+------+------+------|                                        |------|------+------+------+------+------+------|
-   * | SYMB | LSft |   Z  |   X  |   C  |   V  |  B   |                                        |  N   |   M  |   ,  |   .  |   /  |  UP  | RSft |
-   * |------+------+------+------+------+------+------|                                        |------+------+------+------+------+------+------|
-   * | LGUI | LCtrl|   `  |   \  | LAlt | META |Space |                                        |Space |   '  |   -  |   =  | LEFT | DOWN | RIGHT|
-   * `------------------------------------------------'                                        `------------------------------------------------'
+   * ,------------------------------------------------.                        ,------------------------------------------------.
+   * | ESC  | Tab  |   Q  |   W  |   E  |   R  |  T   |                        |  Y   |   U  |   I  |   O  |   P  |   [  | Bksp |
+   * |------+------+------+------+------+------+------|                        |-------------+------+------+------+------+------|
+   * | Del  | RCtrl|   A  |   S  |   D  |   F  |  G   |                        |  H   |   J  |   K  |   L  |   ;  |   ]  | Enter|
+   * |------+------+------+------+------+------+------|                        |------|------+------+------+------+------+------|
+   * | SYMB | LSft |   Z  |   X  |   C  |   V  |  B   |                        |  N   |   M  |   ,  |   .  |   /  |  UP  | RSft |
+   * |------+------+------+------+------+------+------|                        |------+------+------+------+------+------+------|
+   * | LGUI | LCtrl|   `  |   \  | LAlt | META |Space |                        |Space |   '  |   -  |   =  | LEFT | DOWN | RIGHT|
+   * `------------------------------------------------'                        `------------------------------------------------'
    */
   [BASE] = LAYOUT( \
-    KC_ESC,   KC_TAB,         KC_Q,   KC_W,    KC_E,    KC_R,             KC_T,                 KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC, KC_BSPC, \
-    KC_DEL,   LCTL_T(KC_ESC), KC_A,   KC_S,    KC_D,    KC_F,             KC_G,                 KC_H,   KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_BSLS, \
-    MO(SYMB), KC_LSFT,        KC_Z,   KC_X,    KC_C,    KC_V,             KC_B,                 KC_N,   KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT, KC_UP, \
-    KC_LGUI,  KC_LCTL,        RESET,  KC_LGUI, KC_LALT, LT(META, KC_SPC), LSFT_T(KC_ESC),       KC_SPC, KC_ENT,  KC_MINS, KC_EQL, KC_LEFT, KC_DOWN, KC_RGHT \
+    KC_ESC,   KC_TAB,  BE_A,   BE_Z,    BE_E,    BE_R,  BE_T,                  BE_Y,   BE_U,    BE_I,    BE_O,    BE_P,    BE_DCIR, BE_DLR, \
+    KC_LCTL,  KC_LCTL, BE_Q,   BE_S,    BE_D,    BE_F,  BE_G,                  BE_H, FIX_BE_J,    BE_K,    BE_L,    BE_M,    BE_UGRV, BE_MICR, \
+    KC_LSFT,  BE_LABK, BE_W,   BE_X,    BE_C,    BE_V,  BE_B,                  BE_N,  BE_COMM, BE_SCLN, BE_COLN, BE_EQL, KC_RSFT, KC_RSFT, \
+    KC_LGUI,  KC_LCTL, RESET,  KC_LGUI, KC_LALT, KC_SPC, LSFT_T(KC_ESC),       KC_RGUI, RCTL_T(KC_ENT),  KC_RALT, KC_EQL, KC_LEFT,  KC_DOWN, KC_RGHT \
   ),
 
   /* META
