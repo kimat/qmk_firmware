@@ -46,10 +46,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `------------------------------------------------'                        `------------------------------------------------'
    */
   [BASE] = LAYOUT( \
-    KC_ESC,   KC_TAB,  BE_A,   BE_Z,    BE_E,    BE_R,  BE_T,                  BE_Y,   BE_U,    BE_I,    BE_O,    BE_P,    BE_DCIR, BE_DLR, \
-    KC_LCTL,  KC_LCTL, BE_Q,   BE_S,    BE_D,    BE_F,  BE_G,                  BE_H, FIX_BE_J,    BE_K,    BE_L,    BE_M,    BE_UGRV, BE_MICR, \
-    KC_LSFT,  BE_LABK, BE_W,   BE_X,    BE_C,    BE_V,  BE_B,                  BE_N,  BE_COMM, BE_SCLN, BE_COLN, BE_EQL, KC_RSFT, KC_RSFT, \
-    KC_LGUI,  KC_LCTL, RESET,  KC_LGUI, KC_LALT, KC_SPC, LSFT_T(KC_ESC),       KC_RGUI, RCTL_T(KC_ENT),  KC_RALT, KC_EQL, KC_LEFT,  KC_DOWN, KC_RGHT \
+    KC_ESC,   KC_TAB,  BE_A,   BE_Z,    BE_E,    BE_R,   BE_T,                  BE_Y,   BE_U,    BE_I,    BE_O,    BE_P,    BE_DCIR, BE_DLR, \
+    KC_LCTL,  KC_LCTL, BE_Q,   BE_S,    BE_D,    BE_F,   BE_G,                  BE_H, FIX_BE_J,    BE_K,    BE_L,    BE_M,    BE_UGRV, BE_MICR, \
+    KC_LSFT,  BE_LABK, BE_W,   BE_X,    BE_C,    BE_V,   BE_B,                  BE_N,  BE_COMM, BE_SCLN, BE_COLN, BE_EQL, KC_RSFT, KC_RSFT, \
+    KC_LGUI,  KC_LCTL, RESET,  KC_LGUI, KC_LALT, KC_SPC, KC_RSFT,               KC_RGUI, KC_RCTL,  KC_RALT, KC_EQL, KC_LEFT,  KC_DOWN, KC_RGHT \
   ),
 
   /* META
